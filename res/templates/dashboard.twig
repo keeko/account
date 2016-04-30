@@ -1,0 +1,28 @@
+<h1>Dashboard for {{ user.getDisplayName() }}</h1>
+
+<div class="panel panel-default settings">
+	<div class="panel-heading">
+		<h3 class="panel-title"><i class="fa fa-bolt" aria-hidden="true"></i> {{ t('activities') }}</h3>
+	</div>
+	<div class="panel-body">
+		Nothing to show here...
+	</div>
+</div>
+
+<div class="panel panel-default settings">
+	<div class="panel-heading">
+		<h3 class="panel-title"><i class="fa fa-cog" aria-hidden="true"></i> {{ t('settings') }}</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			{% for k, data in settings %}
+			<div class="col-md-2">
+	    		<a href="{{ locations.account_url ~ t('slug.settings') }}/{{ t(data.slug, [], data.domain) }}" class="thumbnail">
+					<i class="fa fa-{{ data.icon|default('cog') }} fa-4x" aria-hidden="true"></i>
+					{{ t(data.label, [], data.domain) }}
+				</a>
+  			</div>
+  			{% endfor %}
+		</div>
+	</div>
+</div>

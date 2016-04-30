@@ -1,0 +1,35 @@
+{
+	"title": "User Settings Extension",
+	"type": "object",
+	"patternProperties": {
+        "^([a-zA-Z0-9\-]+)$": {
+        	"type": "object",
+        	"properties": {
+        	    "label": {
+        	    	"type": "string",
+        	    	"description": "The l10n key for the label"
+        	    },
+        	    "icon": {
+        	    	"type": "string",
+        	    	"description": "Font-Awesome icon string (anyway a cog will be used)"
+        	    },
+        	    "slug": {
+        	        "type": "string",
+        	    	"description": "The l10n key for the slug"
+        	    },
+        	    "domain": {
+        	    	"type": "string",
+        	    	"description": "The locales domain"
+        	    },
+        	    "module": {
+        	    	"type": "string",
+        	    	"description": "The module in which the action is located"
+        	    },
+        	    "action": {
+        	    	"type": "string",
+        	    	"description": "The name of the action"
+        	    }
+        	}
+        }
+    }
+}

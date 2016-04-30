@@ -1,0 +1,47 @@
+<li class="dropdown user-widget">
+	<a href="" id="user-widget-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		{% if user.isGuest() %}
+		Login
+		{% else %}
+		<i class="fa fa-user" aria-hidden="true"></i> {{ user.getDisplayName() }}
+		{% endif %}
+		<span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu {% if user.isGuest() %}guest{% else %}user{% endif %}" aria-labelledby="user-widget-dropdown">
+		{% if user.isGuest() %}
+		<li>
+			<form action="{{ destination }}" method="POST" class="container-fluid">
+				<label>{{ t('login') }}</label>
+				<input type="hidden" name="redirect" value="{{ redirect }}">
+				<div class="form-group form-group-sm">
+					<input type="text" id="login" name="login" class="form-control" placeholder="{{ t('login.' ~ login_label) }}">
+				</div>
+				<div class="form-group form-group-sm">
+					<input type="password" id="password" name="password" class="form-control" placeholder="{{ t('login.password') }}">
+				</div>
+				<div class="form-group form-group-sm">
+					<button class="btn btn-success">{{ t('login.submit') }}</button>
+				</div>
+			</form>
+		</li>
+		<li><a href="{{ account_url ~ t('slug.forget-password') }}">{{ t('forget-password') }}</a></li>
+		{% else %}
+		<li>
+			<a href="{{ account_url }}">
+			<i class="fa fa-dashboard" aria-hidden="true"></i> {{ t('dashboard') }}</a>
+		</li>
+		<li>
+			<a href="{{ account_url ~ t('slug.activities') }}">
+			<i class="fa fa-bolt" aria-hidden="true"></i> {{ t('activities') }}</a>
+		</li>
+		<li>
+			<a href="{{ account_url ~ t('slug.settings.profile') }}">
+			<i class="fa fa-cog" aria-hidden="true"></i> {{ t('settings') }}</a>
+		</li>
+		<li>
+			<a href="{{ account_url ~ t('slug.logout', [], 'keeko.user') }}">
+			<i class="fa fa-sign-out" aria-hidden="true"></i> {{ t('logout') }}</a>
+		</li>
+		{% endif %}
+	</ul>
+</li>

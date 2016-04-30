@@ -1,0 +1,26 @@
+{
+	"login.username": "Username",
+	"login.email": "Email",
+	"login.username_email": "Username or Email",
+	"login.password": "Password",
+	"login.submit": "Login",
+	
+	"slug.login": "login",
+	"slug.logout": "logout",
+	"slug.forget-password": "forget-password",
+	"slug.register": "register",
+	"slug.activities": "activities",
+	"slug.settings": "settings",
+	"slug.settings.profile": "profile",
+	"slug.settings.change-password": "change-password",
+	"slug.settings.sessions": "sessions",
+	
+	"login": "Login",
+	"logout": "Logout",
+	"forget-password": "Forget Password",
+	"dashboard": "Dashboard",
+	"activities": "Activities",
+	"settings": "Settings",
+	"profile": "Profile",
+	"change-password": "Change Password"
+}

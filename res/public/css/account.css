@@ -1,0 +1,21 @@
+.settings .thumbnail {
+	text-align: center;
+}
+
+.settings .thumbnail:hover {
+	border-color: #AAA;
+}
+
+.settings .thumbnail {
+	color: #000;
+}
+
+.settings .thumbnail:hover,
+.settings-menu a:hover {
+	text-decoration: none;
+}
+
+.settings .thumbnail .fa {
+	display: block;
+	color: #555;
+}

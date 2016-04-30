@@ -1,0 +1,11 @@
+.user-widget > ul > li > a > i.fa {
+	width: 14px; 
+}
+
+.user-widget > .dropdown-menu.guest {
+	width: 250px;
+}
+
+.user-widget > .dropdown-menu.user {
+	width: 200px;
+}
