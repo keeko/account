@@ -3,8 +3,138 @@
 		<h3 class="panel-title"> {{ t('profile') }}</h3>
 	</div>
 	<div class="panel-body">
-		<div class="row">
+		<form method="post" action="{{ target }}">
+		
+			{% if submitted %}
+				{% if success %}
+				<div class="alert alert-success alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				    <i class="fa fa-check-circle"></i> {{ t('change_profile_success') }}
+				</div>
+				{% else %}
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				    <i class="fa fa-exclamation-circle"></i> {{ t('change_profile_failed') }}
+				</div>
+				{% endif %}
+			{% endif %}
 			
-		</div>
+			{% if prefs.user_names != 'none' %}
+			<div class="row">	
+				<div class="form-group col-md-6">
+					<label for="given_name">{{ t('given_name') }}</label>
+					<input type="text" class="form-control" name="given_name" id="given_name" value="{{ user.getGivenName() }}"{% if prefs.user_names == 'required' %} required{% endif %}>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="family_name">{{ t('family_name') }}</label>
+					<input type="text" class="form-control" name="family_name" id="family_name" value="{{ user.getFamilyName() }}"{% if prefs.user_names == 'required' %} required{% endif %}>
+				</div>
+			</div>
+			{% endif %}
+			
+			{% if prefs.nick_name %}
+			<div class="form-group">
+				<label for="nick_name">{{ t(nickname_label) }}</label>
+				<input type="text" class="form-control" name="nick_name" id="nick_name" value="{{ user.getNickname() }}" required>
+			</div>
+			{% endif %}
+			
+			{% if prefs.display_name == 'user_select' %}
+			<div class="form-group">
+				<label for="display_name">{{ t('display_name') }}</label>
+				<select class="form-control" name="display_name" id="display_name" required>
+					{% if prefs.display_option_given_family and prefs.user_names != 'none' %}
+					{% set value = user.getGivenName() ~ ' ' ~ user.getFamilyName() %}
+					<option id="display_opt_given_family" value="{{ prefs.display_given_family }}" {% if user.getDisplayName() == value %} selected{% endif %}>{{ value }}</option>
+					{% endif %}
+					{% if prefs.display_option_family_given and prefs.user_names != 'none' %}
+					{% set value = user.getFamilyName() ~ ' ' ~ user.getGivenName() %}
+					<option id="display_opt_family_given" value="{{ prefs.display_family_given }}" {% if user.getDisplayName() == value %} selected{% endif %}>{{ value }}</option>
+					{% endif %}
+					{% if prefs.display_option_nickname and prefs.nick_name %}
+					<option id="display_opt_nickname" value="{{ prefs.display_nickname }}" {% if user.getDisplayName() == user.getNickName() %} selected{% endif %}>{{ user.getNickName() }}</option>
+					{% endif %}
+					{% if prefs.display_option_username %}
+					<option value="{{ prefs.display_username }}" {% if user.getDisplayName() == user.getUserName() %} selected{% endif %}>{{ user.getUserName() }}</option>
+					{% endif %}
+				</select>
+				
+				{% set script %}
+					{% if prefs.user_names != 'none' %}
+					let givenName = document.getElementById('given_name');
+					let familyName = document.getElementById('family_name');
+					let givenFamilyOpt = document.getElementById('display_opt_given_family');
+					let familyGivenOpt = document.getElementById('display_opt_family_given');
+
+					updateNames = function() {
+						let given = givenName.value;
+						let family = familyName.value;
+						if (givenFamilyOpt) {
+							givenFamilyOpt.textContent = given + ' ' + family;
+						}
+						if (familyGivenOpt) {
+							familyGivenOpt.textContent = family + ' ' + given;
+						}
+					};
+
+					if (givenName) {
+						givenName.addEventListener('keyup', updateNames);
+					}
+					if (familyName) {
+						familyName.addEventListener('keyup', updateNames);
+					}
+					{% endif %}
+					{% if prefs.display_option_nickname and prefs.nick_name %}
+					let nickName = document.getElementById('nick_name');
+					let nickNameOpt = document.getElementById('display_opt_nickname');
+					nickName.addEventListener('keyup', function() {
+						nickNameOpt.textContent = nickName.value;
+					});
+					{% endif %}
+				{% endset %}
+				{% if script %}
+				<script>
+					{{ script }}
+				</script>
+				{% endif %}	
+				
+			</div>
+			{% endif %}
+
+			{% if prefs.birth != 'none' or prefs.sex != 'none' %}
+			<div class="row">
+			{% endif %}
+				{% if prefs.birth != 'none' %}
+				<div class="form-group col-md-6">
+					<label for="birth">{{ t('birth') }}</label>
+					<input type="date" class="form-control" name="birth" id="birth" placeholder="{{ t('birth_placeholder') }}" value="{{ user.getBirthday('Y-m-d') }}"{% if prefs.birth == 'required' %} required{% endif %}>
+				</div>
+				{% endif %}
+				{% if prefs.sex != 'none' %}
+				<div class="form-group col-md-6">
+					<label for="sex">{{ t('sex') }}</label>
+					
+					<div class="form-control-static">
+					<label class="radio-inline">
+						<input type="radio" name="sex" value="0"{% if user.getSex() == 0 %} checked{% endif %}{% if prefs.sex == 'required' %} required{% endif %}> {{ t('female') }}
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="sex" value="1"{% if user.getSex() == 1 %} checked{% endif %} {% if prefs.sex == 'required' %} required{% endif %}> {{ t('male') }}
+					</label>
+					</div>
+				</div>
+				{% endif %}
+				
+			{% if prefs.birth != 'none' or prefs.sex != 'none' %}
+			</div>
+			{% endif %}
+			
+			<div class="form-group">
+				<label for="email">{{ t('email') }}</label>
+				<input type="text" class="form-control" name="email" id="email" value="{{ user.getEmail() }}" required>
+			</div>
+
+			<button type="submit" class="btn btn-success">{{ t('update') }}</button>
+		</form>
 	</div>
 </div>

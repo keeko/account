@@ -1,0 +1,59 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title"> {{ t('sessions') }}</h3>
+	</div>
+	<div class="panel-body">
+		{% set i = icons %}
+		{% macro icon(name, icons) %}{{ (icons[name|lower] ?: 'question')|lower }}{% endmacro %}
+
+		{% for session in user.getSessions() %}
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="media">
+					{% if session.getDevice() %}
+					<div class="media-left">
+	    				<i class="fa fa-{{ _self.icon(session.getDevice(), i) }} fa-3x"></i>
+					</div>
+					{% endif %}
+					<div class="media-body row">
+						<div class="col-md-6">
+							<dl class="dl-horizontal">
+								<dt>{{ t('last_activity') }}</dt>
+								<dd>{{ session.getUpdatedAt('Y.m.d H:i:s') }}</dd>
+								
+								<dt>{{ t('location') }}</dt>
+								<dd>{{ session.getLocation() }}</dd>
+								
+								<dt>{{ t('IP') }}</dt>
+								<dd>{{ session.getIp() }}</dd>
+							</dl>
+						</div>
+						<div class="col-md-5">
+							<dl class="dl-horizontal">
+								<dt>{{ t('browser') }}</dt>
+								<dd><i class="fa fa-{{ _self.icon(session.getBrowser(), i) }}"></i> {{ session.getBrowser() }}</dd>
+								
+								<dt>{{ t('os') }}</dt>
+								<dd><i class="fa fa-{{ _self.icon(session.getOs(), i) }}"></i> {{ session.getOs() }}</dd>
+							</dl>
+						</div>
+						<div class="col-md-1">
+							{% if active_session == session %}
+		    				<i class="fa fa-check text-success" title="{{ t('active_session') }}"></i>
+		    				{% else %}
+		    				<form action="{{ target }}" method="post">
+		    					<input type="hidden" name="token" value="{{ session.getToken() }}">
+		    					<button type="submit" title="{{ t('delete_session') }}" class="btn btn-danger btn-xs">
+		    						<i class="fa fa-times"></i> <span class="sr-only">{{ t('active_session') }}</span>
+		    					</button>
+		    				</form>
+		    				
+		    				{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>

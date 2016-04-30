@@ -13,7 +13,7 @@ use keeko\framework\domain\payload\Success;
  * 
  * @author gossi
  */
-class UserWidgetAction extends AbstractAction {
+class AccountWidgetAction extends AbstractAction {
 
 	/**
 	 * Automatically generated run method
@@ -25,7 +25,7 @@ class UserWidgetAction extends AbstractAction {
 		$prefs = $this->getServiceContainer()->getPreferenceLoader()->getSystemPreferences();
 		$app = $this->getServiceContainer()->getKernel()->getApplication();
 		$translator = $this->getServiceContainer()->getTranslator();
-		$loginSlug = $translator->trans('slug.login', [], 'keeko.user');
+		$loginSlug = $translator->trans('slug.login', [], 'keeko.account');
 
 		return $this->responder->run($request, new Success([
 			'account_url' => $prefs->getAccountUrl(),

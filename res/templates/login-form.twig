@@ -5,20 +5,20 @@
 		<p class="text-danger">{{ error }}</p>
 		{% endif %}
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="login">{{ t('login.' ~ login_label, [], 'keeko.user') }}</label>
+			<label class="control-label col-sm-2" for="login">{{ t('login.' ~ login_label, [], 'keeko.account') }}</label>
 			<div class="col-sm-6">
 				<input type="text" id="login" name="login" class="form-control" value="{{ login }}">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="password">{{ t('login.password', [], 'keeko.user') }}</label>
+			<label class="control-label col-sm-2" for="password">{{ t('login.password', [], 'keeko.account') }}</label>
 			<div class="col-sm-6">
 				<input type="password" id="password" name="password" class="form-control">
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button class="btn btn-success">{{ t('login.submit', [], 'keeko.user') }}</button>
+				<button class="btn btn-success">{{ t('login.submit', [], 'keeko.account') }}</button>
 			</div>
 		</div>
 	</fieldset>

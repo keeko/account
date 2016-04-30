@@ -43,7 +43,7 @@ class AccountAction extends AbstractAction {
 			$module = $this->getModule();
 			$auth = $this->getServiceContainer()->getAuthManager();
 			$action = null;
-				
+
 			switch ($route) {
 				case 'index':
 					if ($auth->isRecognized()) {
@@ -59,7 +59,9 @@ class AccountAction extends AbstractAction {
 					
 				case 'settings':
 					$action = $module->loadAction('settings', 'html');
-					$action->setSection($match['section']);
+					$action->setParams([
+						'section' => $match['section']
+					]);
 					break;
 						
 				case 'logout':
@@ -90,12 +92,12 @@ class AccountAction extends AbstractAction {
 		$translator = $this->getServiceContainer()->getTranslator();
 		$routes = new RouteCollection();
 		$routes->add('index', new Route('/'));
-		$routes->add('register', new Route('/' . $translator->trans('slug.register', [], 'keeko.user')));
-		$routes->add('login', new Route('/' . $translator->trans('slug.login', [], 'keeko.user')));
-		$routes->add('logout', new Route('/' . $translator->trans('slug.logout', [], 'keeko.user')));
-		$routes->add('forget-password', new Route('/' . $translator->trans('slug.forget-password', [], 'keeko.user')));
+		$routes->add('register', new Route('/' . $translator->trans('slug.register', [], 'keeko.account')));
+		$routes->add('login', new Route('/' . $translator->trans('slug.login', [], 'keeko.account')));
+		$routes->add('logout', new Route('/' . $translator->trans('slug.logout', [], 'keeko.account')));
+		$routes->add('forgot-password', new Route('/' . $translator->trans('slug.forgot-password', [], 'keeko.account')));
 
-		$routes->add('settings', new Route('/' . $translator->trans('slug.settings', [], 'keeko.user') . '/{section}'));
+		$routes->add('settings', new Route('/' . $translator->trans('slug.settings', [], 'keeko.account') . '/{section}'));
 		
 		return $routes;
 	}

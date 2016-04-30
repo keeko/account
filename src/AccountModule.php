@@ -2,6 +2,7 @@
 namespace keeko\account;
 
 use keeko\framework\foundation\AbstractModule;
+use keeko\account\widget\WidgetFactory;
 
 /**
  * Keeko Account
@@ -12,6 +13,17 @@ use keeko\framework\foundation\AbstractModule;
 class AccountModule extends AbstractModule {
 	
 	const EXT_SETTINGS = 'keeko.account.settings';
+	
+	/** @var WidgetFactory */
+	private $widgetFactory;
+	
+	public function getWidgetFactory() {
+		if ($this->widgetFactory == null) {
+			$this->widgetFactory = new WidgetFactory($this->getServiceContainer());
+		}
+		
+		return $this->widgetFactory;
+	}
 
 	/**
 	 */
