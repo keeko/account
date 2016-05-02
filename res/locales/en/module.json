@@ -17,13 +17,14 @@
 	
 	"login": "Login",
 	"logout": "Logout",
-	"forgot-password": "Forget Password",
+	"forgot_password": "Forgot password",
 	"dashboard": "Dashboard",
 	"activity": "Activity",
 	"settings": "Settings",
 	"profile": "Profile",
-	"change-password": "Change Password",
+	"change_password": "Change password",
 	"sessions": "Sessions",
+	"registration": "Registration",
 	
 	"name": "Name",
 	"given_name": "Given Name",
