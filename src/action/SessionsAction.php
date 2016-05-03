@@ -32,8 +32,8 @@ class SessionsAction extends AbstractAction {
 				$translator = $service->getTranslator();
 				$url = sprintf('%s%s/%s',
 					$accountUrl,
-					$translator->trans('slug.settings', [], 'keeko.account'),
-					$translator->trans('slug.settings.sessions', [], 'keeko.account')
+					$translator->trans('slug.settings'),
+					$translator->trans('slug.settings.sessions')
 				);
 				return new RedirectResponse($url);
 			}

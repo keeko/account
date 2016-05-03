@@ -43,7 +43,7 @@ class SettingsAction extends AbstractAction {
 		}
 			
 		if (!isset($routes[$section])) {
-			$url = $prefs->getAccountUrl() . $translator->trans('slug.settings', [], 'keeko.account');
+			$url = $prefs->getAccountUrl() . $translator->trans('slug.settings');
 			throw new ResourceNotFoundException(sprintf('No route found for %s/%s', $url, $section));
 		}
 			

@@ -46,6 +46,7 @@
 	"confirm_new_password": "Confirm new password",
 	"change_password_success": "Password changed successfully.",
 	"change_password_failed": "Something went wrong.",
+	"change_password_nomatch": "Passwords don't match.",
 	
 	"last_activity": "Last activity",
 	"location": "Location",
@@ -53,5 +54,12 @@
 	"browser": "Browser",
 	"os": "Operating System",
 	"active_session": "Active session",
-	"delete_session": "Delete session"
+	"delete_session": "Delete session",
+
+	"forgot_password.subject": "Change Password",	
+	"forgot_password.token_sent": "An email has been sent to <b>%mail%</b>. Please refer there for further instructions.",
+	
+	"error.user_not_found": "User not found",
+	"error.token_invalid": "Invalid Token, please request a <a href=\"%link%\">new one</a>.",
+	"error.token_timeout": "Token timed out, please request a <a href=\"%link%\">new one</a>."
 }

@@ -25,11 +25,10 @@ class AccountWidgetAction extends AbstractAction {
 		$prefs = $this->getServiceContainer()->getPreferenceLoader()->getSystemPreferences();
 		$app = $this->getServiceContainer()->getKernel()->getApplication();
 		$translator = $this->getServiceContainer()->getTranslator();
-		$loginSlug = $translator->trans('slug.login', [], 'keeko.account');
 
 		return $this->responder->run($request, new Success([
 			'account_url' => $prefs->getAccountUrl(),
-			'destination' => $prefs->getAccountUrl() . $loginSlug,
+			'destination' => $prefs->getAccountUrl() . $translator->trans('slug.login'),
 			'referrer' => $app->getFullUrl(),
 			'login_label' => $prefs->getUserLogin()
 		]));

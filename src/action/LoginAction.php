@@ -47,11 +47,12 @@ class LoginAction extends AbstractAction {
 			$error = 'Invalid credentials';
 		}
 		
+		$translator = $this->getServiceContainer()->getTranslator();
 		$module = $this->getModule();
 		$form = $module->getWidgetFactory()->createLoginWidget();
 		$form = $form->build([
 			'error' => $error,
-			'destination' => $prefs->getAccountUrl() . 'login',
+			'destination' => $prefs->getAccountUrl() . $translator->trans('slug.login'),
 			'redirect' => $redirect,
 			'login' => $login
 		]);

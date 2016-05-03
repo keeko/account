@@ -57,6 +57,14 @@ class AccountAction extends AbstractAction {
 					$action = $module->loadAction('login', 'html');
 					break;
 					
+				case 'forgot-password':
+				case 'forgot-password-token':
+					$action = $module->loadAction('forgot-password', 'html');
+					$action->setParams([
+						'token' => isset($match['token']) ? $match['token'] : null
+					]);
+					break;
+					
 				case 'settings':
 					$action = $module->loadAction('settings', 'html');
 					$action->setParams([
@@ -96,6 +104,7 @@ class AccountAction extends AbstractAction {
 		$routes->add('login', new Route('/' . $translator->trans('slug.login', [], 'keeko.account')));
 		$routes->add('logout', new Route('/' . $translator->trans('slug.logout', [], 'keeko.account')));
 		$routes->add('forgot-password', new Route('/' . $translator->trans('slug.forgot-password', [], 'keeko.account')));
+		$routes->add('forgot-password-token', new Route('/' . $translator->trans('slug.forgot-password', [], 'keeko.account') . '/{token}'));
 
 		$routes->add('settings', new Route('/' . $translator->trans('slug.settings', [], 'keeko.account') . '/{section}'));
 		
