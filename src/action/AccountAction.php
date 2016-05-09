@@ -52,9 +52,9 @@ class AccountAction extends AbstractAction {
 						$action = $module->loadAction('index', 'html');
 					}
 					break;
-						
-				case 'login':
-					$action = $module->loadAction('login', 'html');
+					
+				case 'register':
+					$action = $module->loadAction('register', 'html');
 					break;
 					
 				case 'forgot-password':
@@ -63,6 +63,10 @@ class AccountAction extends AbstractAction {
 					$action->setParams([
 						'token' => isset($match['token']) ? $match['token'] : null
 					]);
+					break;
+
+				case 'login':
+					$action = $module->loadAction('login', 'html');
 					break;
 					
 				case 'settings':

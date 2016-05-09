@@ -30,16 +30,23 @@
 	"given_name": "Given Name",
 	"family_name": "Family Name",
 	"nick_name": "Nick Name",
+	"display_name": "Display Name",
+	"user_name": "Username",
 	"birth": "Birthday",
 	"birth_placeholder": "YYYYY-MM-DD",
 	"sex": "Sex",
 	"male": "male",
 	"female": "female",
 	"email": "Email",
-	"display_name": "Display Name",
 	"update": "Update",
 	"change_profile_success": "Profile updated.",
 	"change_profile_failed": "Something went wrong.",
+	
+	"password": "Password",
+	"confirm_password": "Confirm Password",
+	"register": "Register",
+	"thank_you": "Thank you <b>%user%</b> for your registration.",
+	"continue_with": "Continue with <a href=\"%link%\">%label%</a>",
 	
 	"old_password": "Old password",
 	"new_password": "New password",
@@ -60,6 +67,8 @@
 	"forgot_password.token_sent": "An email has been sent to <b>%mail%</b>. Please refer there for further instructions.",
 	
 	"error.user_not_found": "User not found",
+	"error.password_nomatch": "Passwords don't match.",
 	"error.token_invalid": "Invalid Token, please request a <a href=\"%link%\">new one</a>.",
-	"error.token_timeout": "Token timed out, please request a <a href=\"%link%\">new one</a>."
+	"error.token_timeout": "Token timed out, please request a <a href=\"%link%\">new one</a>.",
+	"error.required": "%field% is required"
 }

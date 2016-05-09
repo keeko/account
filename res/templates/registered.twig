@@ -1,0 +1,6 @@
+<h1>{{ t('registration') }}</h1>
+
+<p>{{ t('thank_you', {'user': model.getDisplayName()})|raw }}</p>
+
+<p>{{ t('continue_with', {'label': t('login'), 'link': link})|raw }}.</p>
+{# Here all the other registration modes soon: e.g. instead of continue_with, check your activation mail #}

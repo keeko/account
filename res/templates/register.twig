@@ -1,0 +1,93 @@
+<h1>{{ t('registration') }}</h1>
+<form method="post" action="{{ target }}" class="form-horizontal">
+
+	{% if errors %}
+	<div class="alert alert-danger" role="alert">
+		<ul class="list">
+			{% for error in errors %}
+			<li>{{ error }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+	{% endif %}
+
+	{% if prefs.login != 'email' %}
+	<div class="form-group">
+		<label class="control-label col-md-2" for="user_name">{{ t('user_name') }}</label>
+		<div class="col-md-6">
+			<input type="text" class="form-control" name="user_name" id="user_name" value="{{ fields.user_name }}"{% if prefs.email %} required{% endif %}>
+		</div>
+	</div>
+	{% endif %}
+
+	<div class="form-group">
+		<label class="control-label col-md-2" for="email">{{ t('email') }}</label>
+		<div class="col-md-6">
+			<input type="email" class="form-control" name="email" id="email" value="{{ fields.email }}"{% if prefs.email %} required{% endif %}>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label class="control-label col-md-2" for="password">{{ t('password') }}</label>
+		<div class="col-md-6">
+			<input type="password" class="form-control" name="password" id="password" required>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label class="control-label col-md-2" for="password_confirm">{{ t('confirm_password') }}</label>
+		<div class="col-md-6">
+			<input type="password" class="form-control" name="password_confirm" id="password_confirm" required>
+		</div>
+	</div>
+
+	{% if prefs.user_names != 'none' %}
+	<div class="form-group">
+		<label class="control-label col-md-2" for="given_name">{{ t('given_name') }}</label>
+		<div class="col-md-6">
+			<input type="text" class="form-control" name="given_name" id="given_name" value="{{ fields.given_name }}"{% if prefs.user_names == 'required' %} required{% endif %}>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-md-2" for="family_name">{{ t('family_name') }}</label>
+		<div class="col-md-6">
+			<input type="text" class="form-control" name="family_name" id="family_name" value="{{ fields.family_name }}"{% if prefs.user_names == 'required' %} required{% endif %}>
+		</div>
+	</div>
+	{% endif %}
+	
+	{% if prefs.nick_name %}
+	<div class="form-group">
+		<label class="control-label col-md-2" for="nick_name">{{ t(nickname_label) }}</label>
+		<div class="col-md-6">
+			<input type="text" class="form-control" name="nick_name" id="nick_name" value="{{ field.nick_name }}" required>
+		</div>
+	</div>
+	{% endif %}
+
+	{% if prefs.birth != 'none' %}
+	<div class="form-group">
+		<label class="control-label col-md-2" for="birth">{{ t('birth') }}</label>
+		<div class="col-md-6">
+			<input type="date" class="form-control" name="birth" id="birth" placeholder="{{ t('birth_placeholder') }}" value="{{ fields.birth }}"{% if prefs.birth == 'required' %} required{% endif %}>
+		</div>
+	</div>
+	{% endif %}
+
+	{% if prefs.sex != 'none' %}
+	<div class="form-group">
+		<label class="control-label col-md-2" for="sex">{{ t('sex') }}</label>
+		
+		<div class="col-md-6">
+			<label class="radio-inline">
+				<input type="radio" name="sex" value="0"{% if fields.sex and fields.sex == 0 %} checked{% endif %}{% if prefs.sex == 'required' %} required{% endif %}> {{ t('female') }}
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="sex" value="1"{% if fields.sex == 1 %} checked{% endif %} {% if prefs.sex == 'required' %} required{% endif %}> {{ t('male') }}
+			</label>
+		</div>
+	</div>
+	{% endif %}
+
+	<button type="submit" class="btn btn-success">{{ t('register') }}</button>
+</form>

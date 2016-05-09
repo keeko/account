@@ -1,12 +1,12 @@
 <?php
 namespace keeko\account\action;
 
+use keeko\core\domain\UserDomain;
+use keeko\core\model\User;
 use keeko\framework\domain\payload\Blank;
-use keeko\framework\domain\payload\Failed;
-use keeko\framework\domain\payload\Success;
+use keeko\framework\domain\payload\Updated;
 use keeko\framework\foundation\AbstractAction;
 use keeko\framework\preferences\SystemPreferences;
-use Propel\Runtime\Exception\PropelException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -30,56 +30,43 @@ class ProfileAction extends AbstractAction {
 		if ($request->isMethod('POST')) {
 			$post = $request->request;
 			$user = $this->getServiceContainer()->getAuthManager()->getUser();
+			$domain = new UserDomain($this->getServiceContainer());
+			$serializer = User::getSerializer();
 			
-			if ($post->has('given_name')) {
-				$user->setGivenName($post->get('given_name'));
-			}
+			$fields = $serializer->getFields();
+			$attribs = [];
 			
-			if ($post->has('family_name')) {
-				$user->setFamilyName($post->get('family_name'));
-			}
-			
-			if ($post->has('birth')) {
-				$user->setBirthday($post->get('birth'));
-			}
-			
-			if ($post->has('sex')) {
-				$user->setSex($post->get('sex'));
-			}
-			
-			if ($post->has('nick_name')) {
-				$user->setNickName($post->get('nick_name'));
-			}
-			
-			$user->setEmail($post->get('email'));
-			
-			if ($post->has('display_name')) {
-				switch ($post->get('display_name')) {
-					case SystemPreferences::DISPLAY_GIVENFAMILYNAME:
-						$user->setDisplayName($user->getGivenName() . ' ' . $user->getFamilyName());
-						break;
-						
-					case SystemPreferences::DISPLAY_FAMILYGIVENNAME:
-						$user->setDisplayName($user->getFamilyName() . ' ' . $user->getGivenName());
-						break;
-						
-					case SystemPreferences::DISPLAY_NICKNAME:
-						$user->setDisplayName($user->getNickName());
-						break;
-						
-					case SystemPreferences::DISPLAY_USERNAME:
-						$user->setDisplayName($user->getUserName());
-						break;
+			foreach ($fields as $field) {
+				if ($post->has($field)) {
+					$attribs[$field] = $post->get($field);
 				}
 			}
 			
-			try {
-				$user->save();
-				$payload = new Success();
-			} catch (PropelException $e) {
-				$payload = new Failed();
-			}
+			$payload = $domain->update($user->getId(), ['attributes' => $attribs]);
 			
+			if ($payload instanceof Updated) {
+				if ($post->has('display_name')) {
+					switch ($post->get('display_name')) {
+						case SystemPreferences::DISPLAY_GIVENFAMILYNAME:
+							$user->setDisplayName($user->getGivenName() . ' ' . $user->getFamilyName());
+							break;
+							
+						case SystemPreferences::DISPLAY_FAMILYGIVENNAME:
+							$user->setDisplayName($user->getFamilyName() . ' ' . $user->getGivenName());
+							break;
+							
+						case SystemPreferences::DISPLAY_NICKNAME:
+							$user->setDisplayName($user->getNickName());
+							break;
+							
+						case SystemPreferences::DISPLAY_USERNAME:
+							$user->setDisplayName($user->getUserName());
+							break;
+					}
+					
+					$user->save();
+				}
+			}
 		}
 		return $this->responder->run($request, $payload);
 	}

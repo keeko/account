@@ -131,7 +131,7 @@
 			
 			<div class="form-group">
 				<label for="email">{{ t('email') }}</label>
-				<input type="text" class="form-control" name="email" id="email" value="{{ user.getEmail() }}" required>
+				<input type="email" class="form-control" name="email" id="email" value="{{ user.getEmail() }}"{% if prefs.email %} required{% endif %}>
 			</div>
 
 			<button type="submit" class="btn btn-success">{{ t('update') }}</button>

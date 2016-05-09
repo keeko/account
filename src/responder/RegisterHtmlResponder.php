@@ -1,33 +1,37 @@
 <?php
 namespace keeko\account\responder;
 
+use keeko\framework\domain\payload\Blank;
 use keeko\framework\domain\payload\PayloadInterface;
-use keeko\framework\foundation\AbstractResponder;
+use keeko\framework\foundation\AbstractPayloadResponder;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use keeko\framework\domain\payload\Created;
 use keeko\framework\preferences\SystemPreferences;
-use keeko\framework\domain\payload\Success;
-use keeko\framework\domain\payload\Updated;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Automatically generated HtmlResponder for Account Profile
+ * Automatically generated HtmlResponder for Registration
  * 
  * @author gossi
  */
-class ProfileHtmlResponder extends AbstractResponder {
+class RegisterHtmlResponder extends AbstractPayloadResponder {
 
 	/**
-	 * Automatically generated run method
-	 * 
-	 * @param Request $request
-	 * @param PayloadInterface $payload
-	 * @return Response
 	 */
-	public function run(Request $request, PayloadInterface $payload = null) {
+	protected function getPayloadMethods() {
+		return [
+			'keeko\framework\domain\payload\Blank' => 'form',
+			'keeko\framework\domain\payload\NotValid' => 'form',
+			'keeko\framework\domain\payload\Created' => 'created',
+		];
+	}
+	
+	protected function form(Request $request, PayloadInterface $payload) {
 		$prefs = $this->getServiceContainer()->getPreferenceLoader()->getSystemPreferences();
-		
-		$data = [
+
+		$data = array_merge($payload->get(), [
 			'prefs' => [
+				'login' => $prefs->getUserLogin(),
 				'user_names' => $prefs->getUserNames(),
 				'email' => $prefs->getUserEmail(),
 				'sex' => $prefs->getUserSex(),
@@ -43,11 +47,13 @@ class ProfileHtmlResponder extends AbstractResponder {
 				'display_nickname' => SystemPreferences::DISPLAY_NICKNAME,
 				'display_username' => SystemPreferences::DISPLAY_USERNAME
 			],
-			'nickname_label' => $prefs->getUserNames() != SystemPreferences::VALUE_NONE ? 'nick_name' : 'name',
-			'target' => $this->getServiceContainer()->getKernel()->getApplication()->getFullUrl(),
-			'submitted' => $request->isMethod('POST'),
-			'success' => $payload instanceof Updated
-		];
-		return new Response($this->render('/keeko/account/templates/profile.twig', $data));
+			'target' => $this->getServiceContainer()->getKernel()->getApplication()->getFullUrl()
+		]);
+		
+		return new Response($this->render('/keeko/account/templates/register.twig', $data));
+	}
+	
+	protected function created(Request $request, Created $payload) {
+		return new Response($this->render('/keeko/account/templates/registered.twig', $payload->get()));
 	}
 }

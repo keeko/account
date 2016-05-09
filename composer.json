@@ -186,6 +186,16 @@
 						"response": {
 							"html": "keeko\\account\\responder\\ForgotPasswordHtmlResponder"
 						}
+					},
+					"register": {
+						"title": "Registration",
+						"class": "keeko\\account\\action\\RegisterAction",
+						"acl": [
+							"guest"
+						],
+						"response": {
+							"html": "keeko\\account\\responder\\RegisterHtmlResponder"
+						}
 					}
 				}
 			}
