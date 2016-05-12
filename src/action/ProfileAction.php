@@ -34,6 +34,7 @@ class ProfileAction extends AbstractAction {
 			$serializer = User::getSerializer();
 			
 			$fields = $serializer->getFields();
+			$fields[] = 'display_name_user_select';
 			$attribs = [];
 			
 			foreach ($fields as $field) {
@@ -44,29 +45,29 @@ class ProfileAction extends AbstractAction {
 			
 			$payload = $domain->update($user->getId(), ['attributes' => $attribs]);
 			
-			if ($payload instanceof Updated) {
-				if ($post->has('display_name')) {
-					switch ($post->get('display_name')) {
-						case SystemPreferences::DISPLAY_GIVENFAMILYNAME:
-							$user->setDisplayName($user->getGivenName() . ' ' . $user->getFamilyName());
-							break;
+// 			if ($payload instanceof Updated) {
+// 				if ($post->has('display_name')) {
+// 					switch ($post->get('display_name')) {
+// 						case SystemPreferences::DISPLAY_GIVENFAMILYNAME:
+// 							$user->setDisplayName($user->getGivenName() . ' ' . $user->getFamilyName());
+// 							break;
 							
-						case SystemPreferences::DISPLAY_FAMILYGIVENNAME:
-							$user->setDisplayName($user->getFamilyName() . ' ' . $user->getGivenName());
-							break;
+// 						case SystemPreferences::DISPLAY_FAMILYGIVENNAME:
+// 							$user->setDisplayName($user->getFamilyName() . ' ' . $user->getGivenName());
+// 							break;
 							
-						case SystemPreferences::DISPLAY_NICKNAME:
-							$user->setDisplayName($user->getNickName());
-							break;
+// 						case SystemPreferences::DISPLAY_NICKNAME:
+// 							$user->setDisplayName($user->getNickName());
+// 							break;
 							
-						case SystemPreferences::DISPLAY_USERNAME:
-							$user->setDisplayName($user->getUserName());
-							break;
-					}
+// 						case SystemPreferences::DISPLAY_USERNAME:
+// 							$user->setDisplayName($user->getUserName());
+// 							break;
+// 					}
 					
-					$user->save();
-				}
-			}
+// 					$user->save();
+// 				}
+// 			}
 		}
 		return $this->responder->run($request, $payload);
 	}

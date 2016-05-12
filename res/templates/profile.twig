@@ -42,7 +42,7 @@
 			{% if prefs.display_name == 'user_select' %}
 			<div class="form-group">
 				<label for="display_name">{{ t('display_name') }}</label>
-				<select class="form-control" name="display_name" id="display_name" required>
+				<select class="form-control" name="display_name_user_select" id="display_name" required>
 					{% if prefs.display_option_given_family and prefs.user_names != 'none' %}
 					{% set value = user.getGivenName() ~ ' ' ~ user.getFamilyName() %}
 					<option id="display_opt_given_family" value="{{ prefs.display_given_family }}" {% if user.getDisplayName() == value %} selected{% endif %}>{{ value }}</option>
