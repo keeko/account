@@ -62,6 +62,8 @@
 	"os": "Operating System",
 	"active_session": "Active session",
 	"delete_session": "Delete session",
+	
+	"registration.subject": "Registration at %plattform%",
 
 	"forgot_password.subject": "Change Password",	
 	"forgot_password.token_sent": "An email has been sent to <b>%mail%</b>. Please refer there for further instructions.",

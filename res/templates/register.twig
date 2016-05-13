@@ -1,11 +1,14 @@
 <h1>{{ t('registration') }}</h1>
 <form method="post" action="{{ target }}" class="form-horizontal">
 
-	{% if errors %}
+	{% if errors or failures %}
 	<div class="alert alert-danger" role="alert">
 		<ul class="list">
 			{% for error in errors %}
-			<li>{{ error }}</li>
+			<li>{{ error.getMessage() }}</li>
+			{% endfor %}
+			{% for fail in failures %}
+			<li>{{ fail }}</li>
 			{% endfor %}
 		</ul>
 	</div>
@@ -15,7 +18,7 @@
 	<div class="form-group">
 		<label class="control-label col-md-2" for="user_name">{{ t('user_name') }}</label>
 		<div class="col-md-6">
-			<input type="text" class="form-control" name="user_name" id="user_name" value="{{ fields.user_name }}"{% if prefs.email %} required{% endif %}>
+			<input type="text" class="form-control" name="user_name" id="user_name" value="{{ fields.user_name }}" required>
 		</div>
 	</div>
 	{% endif %}
@@ -41,7 +44,7 @@
 		</div>
 	</div>
 
-	{% if prefs.user_names != 'none' %}
+	{% if prefs.names != 'none' %}
 	<div class="form-group">
 		<label class="control-label col-md-2" for="given_name">{{ t('given_name') }}</label>
 		<div class="col-md-6">

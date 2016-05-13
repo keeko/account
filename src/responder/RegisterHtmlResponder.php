@@ -32,7 +32,7 @@ class RegisterHtmlResponder extends AbstractPayloadResponder {
 		$data = array_merge($payload->get(), [
 			'prefs' => [
 				'login' => $prefs->getUserLogin(),
-				'user_names' => $prefs->getUserNames(),
+				'names' => $prefs->getUserNames(),
 				'email' => $prefs->getUserEmail(),
 				'sex' => $prefs->getUserSex(),
 				'birth' => $prefs->getUserBirth(),
