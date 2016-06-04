@@ -4,7 +4,8 @@
 	"type" : "keeko-module",
 	"license" : "MIT",
 	"authors" : [{
-			"name" : "gossi"
+			"name" : "Thomas Gossmann",
+			"homepage" : "http://gos.si"
 		}
 	],
 	"autoload" : {
@@ -19,8 +20,7 @@
 	"require-dev" : {
 		"keeko/framework" : "dev-master",
 		"keeko/core" : "@dev",
-		"composer/composer" : "@dev",
-		"propel/propel" : "@dev",
+		"propel/propel" : "@alpha",
 		"puli/repository" : "@beta",
 		"puli/composer-plugin" : "@beta",
 		"puli/twig-extension" : "@beta",
@@ -57,7 +57,8 @@
 							"domain" : "keeko.account",
 							"module" : "keeko/account",
 							"action" : "sessions"
-					}]
+						}
+					]
 				},
 				"actions" : {
 					"dashboard" : {
@@ -66,7 +67,7 @@
 						"acl" : [
 							"user"
 						],
-						"response" : {
+						"responder" : {
 							"html" : "keeko\\account\\responder\\DashboardHtmlResponder"
 						},
 						"styles" : [
@@ -79,7 +80,7 @@
 						"acl" : [
 							"guest"
 						],
-						"response" : {
+						"responder" : {
 							"html" : "keeko\\account\\responder\\IndexHtmlResponder"
 						}
 					},
@@ -89,7 +90,7 @@
 						"acl" : [
 							"guest"
 						],
-						"response" : {
+						"responder" : {
 							"html" : "keeko\\account\\responder\\AccountWidgetHtmlResponder"
 						},
 						"styles" : [
@@ -102,7 +103,7 @@
 						"acl" : [
 							"guest"
 						],
-						"response" : {
+						"responder" : {
 							"html" : "keeko\\account\\responder\\AccountHtmlResponder"
 						}
 					},
@@ -112,7 +113,7 @@
 						"acl" : [
 							"guest"
 						],
-						"response" : {
+						"responder" : {
 							"html" : "keeko\\account\\responder\\LoginHtmlResponder"
 						}
 					},
@@ -129,7 +130,7 @@
 						"acl" : [
 							"user"
 						],
-						"response" : {
+						"responder" : {
 							"html" : "keeko\\account\\responder\\ProfileHtmlResponder"
 						}
 					},
@@ -139,7 +140,7 @@
 						"acl" : [
 							"user"
 						],
-						"response" : {
+						"responder" : {
 							"html" : "keeko\\account\\responder\\SettingsHtmlResponder"
 						},
 						"styles" : [
@@ -152,7 +153,7 @@
 						"acl" : [
 							"user"
 						],
-						"response" : {
+						"responder" : {
 							"html" : "keeko\\account\\responder\\ChangePasswordHtmlResponder"
 						}
 					},
@@ -162,7 +163,7 @@
 						"acl" : [
 							"user"
 						],
-						"response" : {
+						"responder" : {
 							"html" : "keeko\\account\\responder\\SessionsHtmlResponder"
 						}
 					},
@@ -172,7 +173,7 @@
 						"acl" : [
 							"guest"
 						],
-						"response" : {
+						"responder" : {
 							"html" : "keeko\\account\\responder\\ForgotPasswordHtmlResponder"
 						}
 					},
@@ -182,7 +183,7 @@
 						"acl" : [
 							"guest"
 						],
-						"response" : {
+						"responder" : {
 							"html" : "keeko\\account\\responder\\RegisterHtmlResponder"
 						}
 					}
