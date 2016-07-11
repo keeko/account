@@ -1,0 +1,33 @@
+{% macro activities(activities, user) %}
+{% set month = -1 %}
+{% set day = -1 %}
+
+<table class="table table-condensed table-bordered">
+{% for activity in activities %}
+{% if month != activity.getCreatedAt('m') %}
+    {% set month = activity.getCreatedAt('m') %}
+    <tr>
+    	<th colspan="2">{{ activity.getCreatedAt('F Y') }}</th>
+    </tr>
+{% endif %}
+{% if day != activity.getCreatedAt('d') %}
+    {% set day = activity.getCreatedAt('d') %}
+    <tr>
+    	<th colspan="2">{{ activity.getCreatedAt('F d') }}</th>
+    </tr>
+{% endif %}
+
+<tr>
+	<td>
+		{{ user.getDisplayName() }} 
+		{{ t('verb.' ~ activity.getVerb()) }} 
+		a {{ t('type.' ~ activity.getObject().getType()) }} 
+		on {{ activity.getTarget().getDisplayName() }} 
+	</td>
+	<td>
+	    {{ activity.getObject.getDisplayName() }}
+	</td>
+</tr>
+{% endfor %}
+</table>
+{% endmacro %}

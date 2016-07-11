@@ -1,7 +1,6 @@
 <?php
 namespace keeko\account\action;
 
-use keeko\account\AccountModule;
 use keeko\core\model\ActivityQuery;
 use keeko\framework\domain\payload\Blank;
 use keeko\framework\foundation\AbstractAction;
@@ -10,13 +9,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Account Dashboard
+ * Activity Log
  *
  * This code is automatically created. Modifications will probably be overwritten.
  *
- * @author gossi
+ * @author Thomas Gossmann
  */
-class DashboardAction extends AbstractAction {
+class ActivityAction extends AbstractAction {
 
 	/**
 	 * Automatically generated run method
@@ -26,10 +25,9 @@ class DashboardAction extends AbstractAction {
 	 */
 	public function run(Request $request) {
 		$user = $this->getServiceContainer()->getAuthManager()->getUser();
-		$activities = ActivityQuery::create()->filterByActor($user)->limit(5)->orderById(Criteria::DESC)->find();
-		$reg = $this->getServiceContainer()->getExtensionRegistry();
+		$activities = ActivityQuery::create()->filterByActor($user)->orderById(Criteria::DESC)->find();
+
 		return $this->responder->run($request, new Blank([
-			'settings' => $reg->getExtensions(AccountModule::EXT_SETTINGS),
 			'activities' => $activities
 		]));
 	}

@@ -14,16 +14,16 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 /**
  * Account
- * 
+ *
  * This code is automatically created. Modifications will probably be overwritten.
- * 
+ *
  * @author gossi
  */
 class AccountAction extends AbstractAction {
-	
+
 	/**
 	 * Automatically generated run method
-	 * 
+	 *
 	 * @param Request $request
 	 * @return Response
 	 */
@@ -34,7 +34,7 @@ class AccountAction extends AbstractAction {
 		$context = new RequestContext($prefs->getAccountUrl());
 		$matcher = new UrlMatcher($routes, $context);
 		$payload = [];
-		
+
 		try {
 			$path = $this->getServiceContainer()->getKernel()->getApplication()->getDestinationPath();
 			$path = str_replace('//', '/', '/' . $path);
@@ -52,11 +52,11 @@ class AccountAction extends AbstractAction {
 						$action = $module->loadAction('index', 'html');
 					}
 					break;
-					
+
 				case 'register':
 					$action = $module->loadAction('register', 'html');
 					break;
-					
+
 				case 'forgot-password':
 				case 'forgot-password-token':
 					$action = $module->loadAction('forgot-password', 'html');
@@ -68,14 +68,18 @@ class AccountAction extends AbstractAction {
 				case 'login':
 					$action = $module->loadAction('login', 'html');
 					break;
-					
+
+				case 'activity':
+					$action = $module->loadAction('activity', 'html');
+					break;
+
 				case 'settings':
 					$action = $module->loadAction('settings', 'html');
 					$action->setParams([
 						'section' => $match['section']
 					]);
 					break;
-						
+
 				case 'logout':
 					$action = $module->loadAction('logout');
 					break;
@@ -83,7 +87,7 @@ class AccountAction extends AbstractAction {
 
 			$kernel = $this->getServiceContainer()->getKernel();
 			$response = $kernel->handle($action, $request);
-			
+
 			if ($response instanceof RedirectResponse) {
 				return $response;
 			}
@@ -93,13 +97,13 @@ class AccountAction extends AbstractAction {
 			];
 		} catch (ResourceNotFoundException $e) {
 			$response->setStatusCode(Response::HTTP_NOT_FOUND);
-			
+
 			return $response;
 		}
 
 		return $this->responder->run($request, new Blank($payload));
 	}
-	
+
 	private function generateRoutes() {
 		$translator = $this->getServiceContainer()->getTranslator();
 		$routes = new RouteCollection();
@@ -110,8 +114,9 @@ class AccountAction extends AbstractAction {
 		$routes->add('forgot-password', new Route('/' . $translator->trans('slug.forgot-password', [], 'keeko.account')));
 		$routes->add('forgot-password-token', new Route('/' . $translator->trans('slug.forgot-password', [], 'keeko.account') . '/{token}'));
 
+		$routes->add('activity', new Route('/' . $translator->trans('slug.activity')));
 		$routes->add('settings', new Route('/' . $translator->trans('slug.settings', [], 'keeko.account') . '/{section}'));
-		
+
 		return $routes;
 	}
 }
