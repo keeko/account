@@ -74,6 +74,8 @@
 	"error.token_timeout": "Token timed out, please request a <a href=\"%link%\">new one</a>.",
 	"error.required": "%field% is required",
 	
+	"no_activity": "No activity",
+	
 	"verb.edit": "edited",
 	"verb.accept": "accepted",
 	"verb.access": "accessed",

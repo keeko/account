@@ -24,6 +24,8 @@ class ActivityAction extends AbstractAction {
 	 * @return Response
 	 */
 	public function run(Request $request) {
+		$page = $this->getServiceContainer()->getKernel()->getApplication()->getPage();
+		$page->setTitle($this->getServiceContainer()->getTranslator()->trans('activity'));
 		$user = $this->getServiceContainer()->getAuthManager()->getUser();
 		$activities = ActivityQuery::create()->filterByActor($user)->orderById(Criteria::DESC)->find();
 

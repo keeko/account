@@ -1,5 +1,5 @@
 <?php
-namespace keeko\account\responder;
+namespace keeko\account\responder\html;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +13,7 @@ use keeko\framework\domain\payload\Failed;
 
 /**
  * Automatically generated HtmlResponder for Forgot Password
- * 
+ *
  * @author gossi
  */
 class ForgotPasswordHtmlResponder extends AbstractPayloadResponder {
@@ -54,7 +54,7 @@ class ForgotPasswordHtmlResponder extends AbstractPayloadResponder {
 		]);
 		return new Response($this->render('/keeko/account/templates/forgot-password-identify-user.twig', $data));
 	}
-	
+
 	protected function updated(Request $request, Updated $payload) {
 		$prefs = $this->getServiceContainer()->getPreferenceLoader()->getSystemPreferences();
 		return new RedirectResponse($prefs->getAccountUrl());

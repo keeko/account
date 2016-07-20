@@ -1,5 +1,5 @@
 <?php
-namespace keeko\account\responder;
+namespace keeko\account\responder\html;
 
 use keeko\framework\domain\payload\Blank;
 use keeko\framework\domain\payload\PayloadInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Automatically generated HtmlResponder for Registration
- * 
+ *
  * @author gossi
  */
 class RegisterHtmlResponder extends AbstractPayloadResponder {
@@ -25,7 +25,7 @@ class RegisterHtmlResponder extends AbstractPayloadResponder {
 			'keeko\framework\domain\payload\Created' => 'created',
 		];
 	}
-	
+
 	protected function form(Request $request, PayloadInterface $payload) {
 		$prefs = $this->getServiceContainer()->getPreferenceLoader()->getSystemPreferences();
 
@@ -47,12 +47,12 @@ class RegisterHtmlResponder extends AbstractPayloadResponder {
 				'display_nickname' => SystemPreferences::DISPLAY_NICKNAME,
 				'display_username' => SystemPreferences::DISPLAY_USERNAME
 			],
-			'target' => $this->getServiceContainer()->getKernel()->getApplication()->getFullUrl()
+			'target' => $request->getUri()
 		]);
-		
+
 		return new Response($this->render('/keeko/account/templates/register.twig', $data));
 	}
-	
+
 	protected function created(Request $request, Created $payload) {
 		return new Response($this->render('/keeko/account/templates/registered.twig', $payload->get()));
 	}

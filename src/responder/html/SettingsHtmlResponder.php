@@ -1,5 +1,5 @@
 <?php
-namespace keeko\account\responder;
+namespace keeko\account\responder\html;
 
 use keeko\framework\domain\payload\PayloadInterface;
 use keeko\framework\foundation\AbstractResponder;
@@ -7,20 +7,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Automatically generated HtmlResponder for Account
- * 
+ * Automatically generated HtmlResponder for Account Settings
+ *
  * @author gossi
  */
-class AccountHtmlResponder extends AbstractResponder {
+class SettingsHtmlResponder extends AbstractResponder {
 
 	/**
 	 * Automatically generated run method
-	 * 
+	 *
 	 * @param Request $request
 	 * @param PayloadInterface $payload
 	 * @return Response
 	 */
 	public function run(Request $request, PayloadInterface $payload = null) {
-		return new Response($this->render('/keeko/account/templates/account.twig', $payload->get()));
+		return new Response($this->render('/keeko/account/templates/settings.twig', $payload->get()));
 	}
 }

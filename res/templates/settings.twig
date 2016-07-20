@@ -9,7 +9,7 @@
 				{% for k, data in settings %}
 				<li class="list-group-item">
 					<i class="fa fa-{{ data.icon|default('cog') }}" aria-hidden="true"></i>
-					<a href="{{ locations.account_url ~ t('slug.settings') }}/{{ t(data.slug, [], data.domain) }}">
+					<a href="{{ locations.account_url ~ '/' ~ t('slug.settings') }}/{{ t(data.slug, [], data.domain) }}">
 						{{ t(data.label, [], data.domain) }}
 					</a>
 				</li>

@@ -24,23 +24,23 @@
 				</div>
 			</form>
 		</li>
-		<li><a href="{{ account_url ~ t('slug.forgot-password') }}">{{ t('forgot_password') }} ?</a></li>
-		<li><a href="{{ account_url ~ t('slug.register') }}">{{ t('registration') }}</a></li>
+		<li><a href="{{ account_url ~ '/' ~ t('slug.forgot-password') }}">{{ t('forgot_password') }} ?</a></li>
+		<li><a href="{{ account_url ~ '/' ~ t('slug.register') }}">{{ t('registration') }}</a></li>
 		{% else %}
 		<li>
 			<a href="{{ account_url }}">
 			<i class="fa fa-dashboard" aria-hidden="true"></i> {{ t('dashboard') }}</a>
 		</li>
 		<li>
-			<a href="{{ account_url ~ t('slug.activity') }}">
+			<a href="{{ account_url ~ '/' ~ t('slug.activity') }}">
 			<i class="fa fa-bolt" aria-hidden="true"></i> {{ t('activity') }}</a>
 		</li>
 		<li>
-			<a href="{{ account_url ~ t('slug.settings.profile') }}">
+			<a href="{{ account_url ~ '/' ~ t('slug.settings') ~ '/' ~ t('slug.settings.profile') }}">
 			<i class="fa fa-cog" aria-hidden="true"></i> {{ t('settings') }}</a>
 		</li>
 		<li>
-			<a href="{{ account_url ~ t('slug.logout') }}">
+			<a href="{{ account_url ~ '/' ~ t('slug.logout') }}">
 			<i class="fa fa-sign-out" aria-hidden="true"></i> {{ t('logout') }}</a>
 		</li>
 		{% endif %}

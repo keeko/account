@@ -9,20 +9,23 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * User Sessions
- * 
+ *
  * This code is automatically created. Modifications will probably be overwritten.
- * 
+ *
  * @author gossi
  */
 class SessionsAction extends AbstractAction {
 
 	/**
 	 * Automatically generated run method
-	 * 
+	 *
 	 * @param Request $request
 	 * @return Response
 	 */
 	public function run(Request $request) {
+		$page = $this->getServiceContainer()->getKernel()->getApplication()->getPage();
+		$page->setTitle($this->getServiceContainer()->getTranslator()->trans('sessions'));
+
 		if ($request->isMethod('POST')) {
 			$post = $request->request;
 			if ($post->has('token')) {
@@ -38,7 +41,7 @@ class SessionsAction extends AbstractAction {
 				return new RedirectResponse($url);
 			}
 		}
-		
+
 		return $this->responder->run($request);
 	}
 }

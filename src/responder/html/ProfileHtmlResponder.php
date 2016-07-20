@@ -1,5 +1,5 @@
 <?php
-namespace keeko\account\responder;
+namespace keeko\account\responder\html;
 
 use keeko\framework\domain\payload\PayloadInterface;
 use keeko\framework\foundation\AbstractResponder;
@@ -11,21 +11,21 @@ use keeko\framework\domain\payload\Updated;
 
 /**
  * Automatically generated HtmlResponder for Account Profile
- * 
+ *
  * @author gossi
  */
 class ProfileHtmlResponder extends AbstractResponder {
 
 	/**
 	 * Automatically generated run method
-	 * 
+	 *
 	 * @param Request $request
 	 * @param PayloadInterface $payload
 	 * @return Response
 	 */
 	public function run(Request $request, PayloadInterface $payload = null) {
 		$prefs = $this->getServiceContainer()->getPreferenceLoader()->getSystemPreferences();
-		
+
 		$data = [
 			'prefs' => [
 				'user_names' => $prefs->getUserNames(),
@@ -44,7 +44,7 @@ class ProfileHtmlResponder extends AbstractResponder {
 				'display_username' => SystemPreferences::DISPLAY_USERNAME
 			],
 			'nickname_label' => $prefs->getUserNames() != SystemPreferences::VALUE_NONE ? 'nick_name' : 'name',
-			'target' => $this->getServiceContainer()->getKernel()->getApplication()->getFullUrl(),
+			'target' => $request->getUri(),
 			'submitted' => $request->isMethod('POST'),
 			'success' => $payload instanceof Updated
 		];

@@ -24,6 +24,9 @@ class ProfileAction extends AbstractAction {
 	 * @return Response
 	 */
 	public function run(Request $request) {
+		$page = $this->getServiceContainer()->getKernel()->getApplication()->getPage();
+		$page->setTitle($this->getServiceContainer()->getTranslator()->trans('profile'));
+
 		$payload = new Blank();
 		if ($request->isMethod('POST')) {
 			$post = $request->request;
@@ -42,30 +45,6 @@ class ProfileAction extends AbstractAction {
 			}
 
 			$payload = $domain->update($user->getId(), ['attributes' => $attribs]);
-
-// 			if ($payload instanceof Updated) {
-// 				if ($post->has('display_name')) {
-// 					switch ($post->get('display_name')) {
-// 						case SystemPreferences::DISPLAY_GIVENFAMILYNAME:
-// 							$user->setDisplayName($user->getGivenName() . ' ' . $user->getFamilyName());
-// 							break;
-
-// 						case SystemPreferences::DISPLAY_FAMILYGIVENNAME:
-// 							$user->setDisplayName($user->getFamilyName() . ' ' . $user->getGivenName());
-// 							break;
-
-// 						case SystemPreferences::DISPLAY_NICKNAME:
-// 							$user->setDisplayName($user->getNickName());
-// 							break;
-
-// 						case SystemPreferences::DISPLAY_USERNAME:
-// 							$user->setDisplayName($user->getUserName());
-// 							break;
-// 					}
-
-// 					$user->save();
-// 				}
-// 			}
 		}
 		return $this->responder->run($request, $payload);
 	}

@@ -25,6 +25,8 @@ class DashboardAction extends AbstractAction {
 	 * @return Response
 	 */
 	public function run(Request $request) {
+		$page = $this->getServiceContainer()->getKernel()->getApplication()->getPage();
+		$page->setTitle($this->getServiceContainer()->getTranslator()->trans('dashboard'));
 		$user = $this->getServiceContainer()->getAuthManager()->getUser();
 		$activities = ActivityQuery::create()->filterByActor($user)->limit(5)->orderById(Criteria::DESC)->find();
 		$reg = $this->getServiceContainer()->getExtensionRegistry();
