@@ -54,6 +54,10 @@ class RegisterHtmlResponder extends AbstractPayloadResponder {
 	}
 
 	protected function created(Request $request, Created $payload) {
-		return new Response($this->render('/keeko/account/templates/registered.twig', $payload->get()));
+		$prefs = $this->getServiceContainer()->getPreferenceLoader()->getSystemPreferences();
+		$translator = $this->getServiceContainer()->getTranslator();
+		return new Response($this->render('/keeko/account/templates/registered.twig', array_merge([
+				'link' => $prefs->getAccountUrl() . '/' . $translator->trans('slug.login')
+			], $payload->get())));
 	}
 }

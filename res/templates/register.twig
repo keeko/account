@@ -18,7 +18,7 @@
 	<div class="form-group">
 		<label class="control-label col-md-2" for="user_name">{{ t('user_name') }}</label>
 		<div class="col-md-6">
-			<input type="text" class="form-control" name="user_name" id="user_name" value="{{ fields.user_name }}" required>
+			<input type="text" class="form-control" name="user-name" id="user_name" value="{{ fields['user-name'] }}" required>
 		</div>
 	</div>
 	{% endif %}
@@ -48,13 +48,13 @@
 	<div class="form-group">
 		<label class="control-label col-md-2" for="given_name">{{ t('given_name') }}</label>
 		<div class="col-md-6">
-			<input type="text" class="form-control" name="given_name" id="given_name" value="{{ fields.given_name }}"{% if prefs.user_names == 'required' %} required{% endif %}>
+			<input type="text" class="form-control" name="given-name" id="given_name" value="{{ fields['given-name'] }}"{% if prefs.user_names == 'required' %} required{% endif %}>
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-md-2" for="family_name">{{ t('family_name') }}</label>
 		<div class="col-md-6">
-			<input type="text" class="form-control" name="family_name" id="family_name" value="{{ fields.family_name }}"{% if prefs.user_names == 'required' %} required{% endif %}>
+			<input type="text" class="form-control" name="family-name" id="family_name" value="{{ fields['family-name'] }}"{% if prefs.user_names == 'required' %} required{% endif %}>
 		</div>
 	</div>
 	{% endif %}
@@ -63,7 +63,7 @@
 	<div class="form-group">
 		<label class="control-label col-md-2" for="nick_name">{{ t(nickname_label) }}</label>
 		<div class="col-md-6">
-			<input type="text" class="form-control" name="nick_name" id="nick_name" value="{{ field.nick_name }}" required>
+			<input type="text" class="form-control" name="nick-name" id="nick_name" value="{{ field['nick-name'] }}" required>
 		</div>
 	</div>
 	{% endif %}

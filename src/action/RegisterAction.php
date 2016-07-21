@@ -42,7 +42,7 @@ class RegisterAction extends AbstractAction {
 			$errors = [];
 
 			// username
-			if ($prefs->getUserLogin() == SystemPreferences::LOGIN_USERNAME && !$post->has('user_name')) {
+			if ($prefs->getUserLogin() == SystemPreferences::LOGIN_USERNAME && !$post->has('user-name')) {
 				$errors[] = $translator->trans('error.required', [
 					'field' => $translator->trans('user_name')
 				]);
@@ -60,14 +60,14 @@ class RegisterAction extends AbstractAction {
 			}
 
 			// given name
-			if ($prefs->getUserNames() == SystemPreferences::VALUE_REQUIRED && !$post->has('given_name')) {
+			if ($prefs->getUserNames() == SystemPreferences::VALUE_REQUIRED && !$post->has('given-name')) {
 				$errors[] = $translator->trans('error.required', [
 					'field' => $translator->trans('given_name')
 				]);
 			}
 
 			// family name
-			if ($prefs->getUserNames() == SystemPreferences::VALUE_REQUIRED && !$post->has('family_name')) {
+			if ($prefs->getUserNames() == SystemPreferences::VALUE_REQUIRED && !$post->has('family-name')) {
 				$errors[] = $translator->trans('error.required', [
 					'field' => $translator->trans('family_name')
 				]);
@@ -103,7 +103,9 @@ class RegisterAction extends AbstractAction {
 			if (count($errors) == 0) {
 				$serializer = User::getSerializer();
 				$fields = $serializer->getFields();
-				$attribs = [];
+				$attribs = [
+					'password' => $post->get('password')
+				];
 
 				foreach ($fields as $field) {
 					if ($post->has($field)) {
