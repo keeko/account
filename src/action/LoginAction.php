@@ -1,13 +1,12 @@
 <?php
 namespace keeko\account\action;
 
+use keeko\framework\domain\payload\Blank;
 use keeko\framework\foundation\AbstractAction;
+use keeko\framework\security\AuthManager;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use keeko\framework\domain\payload\Blank;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Cookie;
-use keeko\framework\security\AuthManager;
 
 /**
  * Account Login
